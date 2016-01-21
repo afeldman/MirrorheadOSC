@@ -20,6 +20,6 @@ if __name__ == "__main__":
    
     time.sleep(5)
 
-    msg = osc_message_builder.OscMessageBuilder(address = "/mdc_layer1_presert2")
-    msg = msg.build()
-    client.send(msg)
+#    msg = osc_message_builder.OscMessageBuilder(address = "/mdc_layer1_presert2")
+#    msg = msg.build()
+#    client.send(msg)
