@@ -26,17 +26,17 @@ class Mirrorhead():
             logging.error(Exception.with_traceback)
             logging.error("Cannot start server")
 
-#
-#toggel fullscreenmode  
-#
+    ##
+    #toggel fullscreenmode  
+    #
     def fullscreen(self, sleeptime=1):
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_fullscreen").build()
         self.client.send(msg)
         time.sleep(sleeptime)
    
-    """
-    restart project
-    """
+    ##
+    #restart project
+    #
     def restart(self, sleeptime=1):
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_restart").build()
         client.send(msg)
@@ -90,10 +90,10 @@ class Mirrorhead():
         client.send(msg)
         time.sleep(sleeptime)
 
-     ##
-     # Load Presets $Y on layer $X
-     #
-     def item(self, preset=1, sleeptime=1):
+    ##
+    # Load Presets $Y on layer $X
+    #
+    def item(self, preset=1, sleeptime=1):
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset%s" % (str(self.layer),str(preset))).build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -102,50 +102,47 @@ class Mirrorhead():
     # select next preset on on layer $X
     #
     def nextitem(self, sleeptime=1):
-       msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_next" % str(self.layer)).build()
-       client.send(msg)
-       time.sleep(sleeptime)
+        msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_next" % str(self.layer)).build()
+        client.send(msg)
+        time.sleep(sleeptime)
        
 
     ##
     # select previous preset on on layer $X
     #
     def previousitem(self, sleeptime=1):
-       msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_previous" % str(self.layer)).build()
-       client.send(msg)
-       time.sleep(sleeptime)
+        msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_previous" % str(self.layer)).build()
+        client.send(msg)
+        time.sleep(sleeptime)
 
     ##
     # load media y on layer x
     #
     def media(self, media=1, sleeptime=1):
-       msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_media%s" % (str(self.layer),str(media)) ).build()
-       client.send(msg)
-       time.sleep(sleeptime)
+        msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_media%s" % (str(self.layer),str(media)) ).build()
+        client.send(msg)
+        time.sleep(sleeptime)
       
     ##
     # select map m on layer y
     #
     def map(self, map=1, sleeptime=1):
-       msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map%s" % (str(self.layer),str(map)) ).build()
-       client.send(msg)
-       time.sleep(sleeptime)   
+        msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map%s" % (str(self.layer),str(map)) ).build()
+        client.send(msg)
+        time.sleep(sleeptime)   
      
     ##
     # select all maps on layer y
     #
     def mapall(self, sleeptime=1):
-       msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map_all" % str(self.layer) ).build()
-       client.send(msg)
-       time.sleep(sleeptime)  
+        msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map_all" % str(self.layer) ).build()
+        client.send(msg)
+        time.sleep(sleeptime)  
       
     ##
     # Same as /mdc_layer$X_map$M + sleep 1 sec + /mdc_layer$X_media$Y
     #
     def map(self, map=1, media=1, sleeptime=1):
-       msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_mm_$s_%s" % (str(self.layer),str(map),str(media) ) ).build()
-       client.send(msg)
-       time.sleep(sleeptime)  
-       
-
-    
+        msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_mm_$s_%s" % (str(self.layer),str(map),str(media) ) ).build()
+        client.send(msg)
+        time.sleep(sleeptime)  
