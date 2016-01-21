@@ -30,6 +30,7 @@ class Mirrorhead():
     #toggel fullscreenmode  
     #
     def fullscreen(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_fullscreen").build()
         self.client.send(msg)
         time.sleep(sleeptime)
@@ -38,6 +39,7 @@ class Mirrorhead():
     #restart project
     #
     def restart(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_restart").build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -46,6 +48,7 @@ class Mirrorhead():
     # Set Playback Play
     #
     def timelinestart(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_timeline_play").build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -54,6 +57,7 @@ class Mirrorhead():
     # Set playback stop
     #
     def timelinestop(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_timeline_stop").build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -62,6 +66,7 @@ class Mirrorhead():
     # set playback to pause
     #
     def timelinepause(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_timeline_pause").build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -70,6 +75,8 @@ class Mirrorhead():
     # select playlistitem
     #
     def playlist(self, item=1, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(item < 1), "under the last item"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_playlist_%s" % str(item)).build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -78,6 +85,7 @@ class Mirrorhead():
     # selsct next playlist item
     #
     def playlistnext(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_playlist_next").build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -86,6 +94,7 @@ class Mirrorhead():
     # selsct next playlist item
     #
     def playlistprevious(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_playlist_previous").build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -94,6 +103,9 @@ class Mirrorhead():
     # Load Presets $Y on layer $X
     #
     def item(self, preset=1, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(preset < 1), "befor the last preset. try one"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset%s" % (str(self.layer),str(preset))).build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -102,6 +114,8 @@ class Mirrorhead():
     # select next preset on on layer $X
     #
     def nextitem(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_next" % str(self.layer)).build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -111,6 +125,8 @@ class Mirrorhead():
     # select previous preset on on layer $X
     #
     def previousitem(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_previous" % str(self.layer)).build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -119,6 +135,8 @@ class Mirrorhead():
     # load media y on layer x
     #
     def media(self, media=1, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_media%s" % (str(self.layer),str(media)) ).build()
         client.send(msg)
         time.sleep(sleeptime)
@@ -127,6 +145,8 @@ class Mirrorhead():
     # select map m on layer y
     #
     def map(self, map=1, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map%s" % (str(self.layer),str(map)) ).build()
         client.send(msg)
         time.sleep(sleeptime)   
@@ -135,6 +155,8 @@ class Mirrorhead():
     # select all maps on layer y
     #
     def mapall(self, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map_all" % str(self.layer) ).build()
         client.send(msg)
         time.sleep(sleeptime)  
@@ -143,6 +165,8 @@ class Mirrorhead():
     # Same as /mdc_layer$X_map$M + sleep 1 sec + /mdc_layer$X_media$Y
     #
     def map(self, map=1, media=1, sleeptime=1):
+        assert(sleeptime < 0), "less then zero seconds"
+        assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_mm_$s_%s" % (str(self.layer),str(map),str(media) ) ).build()
         client.send(msg)
         time.sleep(sleeptime)  
