@@ -5,6 +5,9 @@
 #
 #  More details.
 
+__author__ = "Anton Feldmann"
+__version__ = "0.1.0"
+
 import time
 import logging
 
