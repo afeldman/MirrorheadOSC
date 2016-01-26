@@ -1,12 +1,33 @@
 #!/usr/bin/env python3
 
 ## @package MirrorheadOSC
-#  Documentation for this module.
 #
-#  More details.
+#
+#  Copyright (c) 2016 anton.feldmann@daimler.com
+#
+# Hiermit wird unentgeltlich, jeder Person, die eine Kopie der Software
+# und der zugehörigen Dokumentationen (die "Software") erhält, die
+# Erlaubnis erteilt, uneingeschränkt zu benutzen, inklusive und ohne
+# Ausnahme, dem Recht, sie zu verwenden, kopieren, ändern, fusionieren,
+# verlegen, verbreiten, unter-lizenzieren und/oder zu verkaufen, und 
+# Personen, die diese Software erhalten, diese Rechte zu geben, unter
+# den folgenden Bedingungen:
+#
+# Der obige Urheberrechtsvermerk und dieser Erlaubnisvermerk sind in 
+# alle Kopien oder Teilkopien der Software beizulegen.
+#
+# DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER IMPLIZIERTE GARANTIE 
+# BEREITGESTELLT, EINSCHLIESSLICH DER GARANTIE ZUR BENUTZUNG FÜR DEN
+# VORGESEHENEN ODER EINEM BESTIMMTEN ZWECK SOWIE JEGLICHER 
+# RECHTSVERLETZUNG, JEDOCH NICHT DARAUF BESCHRÄNKT. IN KEINEM FALL SIND
+# DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE
+# ANSPRUCH HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG VON EINEM 
+# VERTRAG, EINEM DELIKT ODER ANDERS IM ZUSAMMENHANG MIT DER BENUTZUNG
+# ODER SONSTIGE VERWENDUNG DER SOFTWARE ENTSTANDEN.[
 
 __author__ = "Anton Feldmann"
 __version__ = "0.1.0"
+__email__ = "anton.feldmann@daimler.com"
 
 import time
 import logging
@@ -44,7 +65,7 @@ class Mirrorhead():
     def restart(self, sleeptime=1):
         assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_restart").build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
    
     ##
@@ -53,7 +74,7 @@ class Mirrorhead():
     def timelinestart(self, sleeptime=1):
         assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_timeline_play").build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -62,7 +83,7 @@ class Mirrorhead():
     def timelinestop(self, sleeptime=1):
         assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_timeline_stop").build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -71,7 +92,7 @@ class Mirrorhead():
     def timelinepause(self, sleeptime=1):
         assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_timeline_pause").build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -81,7 +102,7 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(item < 1), "under the last item"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_playlist_%s" % str(item)).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -90,7 +111,7 @@ class Mirrorhead():
     def playlistnext(self, sleeptime=1):
         assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_playlist_next").build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -99,7 +120,7 @@ class Mirrorhead():
     def playlistprevious(self, sleeptime=1):
         assert(sleeptime < 0), "less then zero seconds"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_playlist_previous").build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -110,7 +131,7 @@ class Mirrorhead():
         assert(preset < 1), "befor the last preset. try one"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset%s" % (str(self.layer),str(preset))).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -120,7 +141,7 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_next" % str(self.layer)).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
        
 
@@ -131,7 +152,7 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_preset_previous" % str(self.layer)).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
 
     ##
@@ -141,7 +162,7 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_media%s" % (str(self.layer),str(media)) ).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)
       
     ##
@@ -151,7 +172,7 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map%s" % (str(self.layer),str(map)) ).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)   
      
     ##
@@ -161,7 +182,7 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_map_all" % str(self.layer) ).build()
-        client.send(msg)
+        self.client.send(msg)
         time.sleep(sleeptime)  
       
     ##
@@ -171,5 +192,5 @@ class Mirrorhead():
         assert(sleeptime < 0), "less then zero seconds"
         assert(self.layer < 1), "smaller then the first layer"
         msg = posc.osc_message_builder.OscMessageBuilder(address = "/mdc_layer%s_mm_$s_%s" % (str(self.layer),str(map),str(media) ) ).build()
-        client.send(msg)
-        time.sleep(sleeptime)  
+        self.client.send(msg)
+        time.sleep(sleeptime)
