@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doxyfile" />
+    <Content Include="License" />
     <Content Include="Readme.md" />
   </ItemGroup>
   <PropertyGroup>
