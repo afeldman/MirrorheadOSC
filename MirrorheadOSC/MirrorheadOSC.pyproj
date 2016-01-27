@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doxyfile" />
+    <Content Include="Readme.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
