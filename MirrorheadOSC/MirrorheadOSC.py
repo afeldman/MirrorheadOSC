@@ -1,7 +1,19 @@
 #!/usr/bin/env python3
 
 ## @package MirrorheadOSC
+# 
+#Mirrorhead Projectors uses a mirror to projekt the content onto the wall.
+#Therfore a OpenSound Controll interface can e used. This python module 
+#gives a controll to the mirrorhead projector such that the prensentation set can changed and modifyed
+#over ethernet with UDP.
 #
+#To use this module use python 3.x.x and the pythonosc module in version 1.5
+#
+#@version 0.1.1
+#@copyright Anton Feldmann Daimler AG 2016
+##
+
+## @license MIT
 #
 #  Copyright (c) 2016 anton.feldmann@daimler.com
 #
@@ -23,27 +35,42 @@
 # DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE
 # ANSPRUCH HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG VON EINEM 
 # VERTRAG, EINEM DELIKT ODER ANDERS IM ZUSAMMENHANG MIT DER BENUTZUNG
-# ODER SONSTIGE VERWENDUNG DER SOFTWARE ENTSTANDEN.[
+# ODER SONSTIGE VERWENDUNG DER SOFTWARE ENTSTANDEN.
+#
+##
 
-__author__ = "Anton Feldmann"
-__version__ = "0.1.0"
-__email__ = "anton.feldmann@daimler.com"
-
+# import module
 import time
-import logging
 
+# try to import the pythonosc module. if the module is not in the PYHTONPATH please reinstall the software
 try:
+    import logging
     import pythonosc as posc
 except ImportError:
     logging.error("can not find pythonosc")
     logging.error("you need pythonosc version 1.5")
 
-class Mirrorhead():
+class mirrorhead():
 
+    ## The constructor.
+    #
+    # the presentation can have different laver. The default layer is 1. The layer can be changed using 
+    #
+    # mirrorhead.layer = <number of layer
+    #
+    # the 
+    #
+    # @param ip the ip is set in the mirrorhead projector. The default adress is "192.168.0.20"
+    # @param the port canbe shanded on the mirrorhead projector controller. The standard port is 7475
+    #
     def __init__(self, ip="192.168.0.200", port=7475): 
         self.ip = ip
         self.port = port 
         self.layer = 1
+
+        ##
+        # connect the mirrorhead projector server
+        ##
         try:
             self.client = posc.udp_client.UDPClient(ip, port)
         except Exception:
